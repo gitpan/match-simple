@@ -1,0 +1,55 @@
+@prefix cpan: <http://purl.org/NET/cpan-uri/person/> .
+@prefix cpant: <http://purl.org/NET/cpan-uri/terms#> .
+@prefix dbug: <http://ontologi.es/doap-bugs#> .
+@prefix dcs: <http://ontologi.es/doap-changeset#> .
+@prefix dist: <http://purl.org/NET/cpan-uri/dist/match-simple/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+_:r1368999828r0 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/match/simple.pm" ;
+	<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#programmingLanguage> "Perl" ;
+	a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject>, <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#SourceCode> ;
+	rdfs:label "match::simple" .
+_:r1368999828r1 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/match/simple.pm" ;
+	<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#programmingLanguage> "Perl" ;
+	a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject>, <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#SourceCode> ;
+	rdfs:label "match::simple" .
+_:r1368999828r2 <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#fileName> "lib/match/simple.pm" ;
+	<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#programmingLanguage> "Perl" ;
+	a <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject>, <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#SourceCode> ;
+	rdfs:label "match::simple" .
+_:rb2F95EFE2C0CD11E28E0F5818462F113Br0 doap:browse <https://github.com/tobyink/p5-match-simple> ;
+	a doap:GitRepository .
+<http://dev.perl.org/licenses/> <http://purl.org/dc/terms/title> "the same terms as the perl 5 programming language system itself" .
+dist:project cpant:perl_version_from _:r1368999828r0 ;
+	cpant:readme_from _:r1368999828r2 ;
+	cpant:requires "Exporter::TypeTiny 0.004"^^cpant:dsWithVersion, "List::MoreUtils 0"^^cpant:dsWithVersion, "Sub::Infix 0.001"^^cpant:dsWithVersion ;
+	cpant:version_from _:r1368999828r1 ;
+	<http://purl.org/dc/terms/contributor> cpan:tobyink ;
+	doap:bug-database <http://rt.cpan.org/Dist/Display.html?Queue=match-simple> ;
+	doap:created "2013-05-19"^^<http://www.w3.org/2001/XMLSchema#date> ;
+	doap:developer cpan:tobyink ;
+	doap:download-page <https://metacpan.org/release/match-simple> ;
+	doap:homepage <https://metacpan.org/release/match-simple> ;
+	doap:license <http://dev.perl.org/licenses/> ;
+	doap:maintainer cpan:tobyink ;
+	doap:name "match-simple" ;
+	doap:programming-language "Perl" ;
+	doap:release dist:v_0-001 ;
+	doap:repository _:rb2F95EFE2C0CD11E28E0F5818462F113Br0 ;
+	doap:shortdesc "simplified clone of smartmatch operator" ;
+	a doap:Project .
+dist:v_0-001 dcs:released-by cpan:tobyink ;
+	<http://purl.org/dc/terms/identifier> "match-simple-0.001"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	<http://purl.org/dc/terms/issued> "2013-05-19"^^<http://www.w3.org/2001/XMLSchema#date> ;
+	doap:file-release <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/match-simple-0.001.tar.gz> ;
+	doap:revision "0.001"^^<http://www.w3.org/2001/XMLSchema#string> ;
+	a doap:Version ;
+	rdfs:label "Initial release" .
+cpan:tobyink a foaf:Person ;
+	foaf:mbox <mailto:tobyink@cpan.org> ;
+	foaf:name "Toby Inkster" ;
+	foaf:nick "TOBYINK" ;
+	foaf:page <https://metacpan.org/author/TOBYINK> .
