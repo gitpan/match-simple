@@ -11,7 +11,7 @@ use Sub::Infix qw(infix);
 
 BEGIN {
 	$match::smart::AUTHORITY = 'cpan:TOBYINK';
-	$match::smart::VERSION   = '0.003';
+	$match::smart::VERSION   = '0.004';
 }
 
 use base "Exporter::TypeTiny";
@@ -125,11 +125,10 @@ match::smart - clone of smartmatch operator
 
 =head1 DESCRIPTION
 
-match::smart provides a simple match operator C<< |M| >> that acts like
-more or less identically to the (as of Perl 5.18) deprecated smart match
-operator.
+match::smart provides a match operator C<< |M| >> that acts like more or
+less identically to the (as of Perl 5.18) deprecated smart match operator.
 
-If you don't like the crazy C<Sub::Infix> operator, you can alternatively
+If you don't like the crazy L<Sub::Infix> operator, you can alternatively
 export a more normal function:
 
    use v5.10;

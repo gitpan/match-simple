@@ -42,7 +42,7 @@ DESCRIPTION
     *   If any other value appears on the right hand side, the operator will
         croak.
 
-    If you don't like the crazy "Sub::Infix" operator, you can alternatively
+    If you don't like the crazy Sub::Infix operator, you can alternatively
     export a more normal function:
 
        use v5.10;

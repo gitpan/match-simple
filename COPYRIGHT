@@ -37,6 +37,10 @@ Files: inc/Module/Install/TrustMetaYml.pm
 Copyright: This software is copyright (c) 2011-2012 by Toby Inkster.
 License: GPL-1.0+ or Artistic-1.0
 
+Files: inc/YAML/Tiny.pm
+Copyright: Copyright 2006 - 2012 Adam Kennedy.
+License: GPL-1.0+ or Artistic-1.0
+
 Files: COPYRIGHT
 Copyright: None
 License: public-domain
@@ -44,10 +48,6 @@ Comment: This file! Automatically generated.
 
 Files: inc/Module/Install/Makefile.pm
 Copyright: Copyright 2002, 2003, 2004 Audrey Tang and Brian Ingerson.
-License: GPL-1.0+ or Artistic-1.0
-
-Files: inc/YAML/Tiny.pm
-Copyright: Copyright 2006 - 2012 Adam Kennedy.
 License: GPL-1.0+ or Artistic-1.0
 
 Files: inc/Module/Install/Base.pm
