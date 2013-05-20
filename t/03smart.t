@@ -4,26 +4,13 @@
 
 =head1 PURPOSE
 
-Test that match::simple works.
-
-=head1 AUTHOR
-
-Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
-
-=head1 COPYRIGHT AND LICENCE
-
-This software is copyright (c) 2013 by Toby Inkster.
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
+Test that match::smart works.
 
 =cut
 
 use strict;
 use warnings;
 no warnings 'uninitialized';
-no if $] >= 5.018, warnings => 'experimental::smartmatch';
 use Test::More;
 
 use match::smart qw(match);
@@ -61,7 +48,7 @@ tie my %tied_hash, 'Tie::StdHash';
 {
 	package Test::Object::WithOverload;
 	sub new { bless { key => ($_[1] // 'magic') } }
-	use overload '~~' => sub {
+	sub MATCH {
 		my %hash = %{ $_[0] };
 		if ($_[2]) { # arguments reversed ?
 			return $_[1] eq reverse $hash{key};
