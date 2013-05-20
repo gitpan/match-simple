@@ -4,13 +4,14 @@ use 5.008001;
 use strict;
 use warnings;
 
+use B qw();
 use List::MoreUtils qw(any all);
-use Scalar::Util qw(blessed looks_like_number);
+use Scalar::Util qw(blessed looks_like_number refaddr);
 use Sub::Infix qw(infix);
 
 BEGIN {
 	$match::smart::AUTHORITY = 'cpan:TOBYINK';
-	$match::smart::VERSION   = '0.001';
+	$match::smart::VERSION   = '0.002';
 }
 
 use base "Exporter::TypeTiny";
@@ -21,12 +22,21 @@ sub match
 {
 	no warnings qw(uninitialized numeric);
 	
-	my ($a, $b) = @_;
+	my ($a, $b, $seen) = @_;
 	
 	return(!defined $a)                    if !defined($b);
 	return !!$b->check($a)                 if blessed($b) && $b->isa("Type::Tiny");
 	return !!$b->MATCH($a)                 if blessed($b) && $b->can("MATCH");
-	return eval 'no warnings; !!($a~~$b)'  if blessed($b) && $] >= 5.010 && do { require overload; overload::Overloaded($b) };
+	return eval 'no warnings; !!($a~~$b)'  if blessed($b) && $] >= 5.010 && do { require overload; overload::Method($b, "~~") };
+	
+	if (blessed($b) and not $b->isa("Regexp"))
+	{
+		require Carp;
+		Carp::croak("Smart matching a non-overloaded object breaks encapsulation");
+	}
+	
+	$seen ||= {};
+	return refaddr($a)==refaddr($b) if $seen->{refaddr($b)}++;
 	
 	if (ref($b) eq q(ARRAY))
 	{
@@ -35,23 +45,25 @@ sub match
 			return !!0 unless @$a == @$b;
 			for my $i (0 .. $#$a)
 			{
-				return !!0 unless match($a->[$i], $b->[$i]);
+				return !!0 unless match($a->[$i], $b->[$i], $seen);
 			}
 			return !!1;
 		}
 		
-		return any { exists $a->{$_} } @$b if ref($a) eq q(HASH);
-		return any { $_ =~ $a } @$b        if ref($a) eq q(Regexp);
-		return any { !defined($_) } @$b    if !defined($a);
+		return any { exists $a->{$_} } @$b  if ref($a) eq q(HASH);
+		return any { $_ =~ $a } @$b         if ref($a) eq q(Regexp);
+		return any { !defined($_) } @$b     if !defined($a);
 		return any { match($a, $_) } @$b;
 	}
 	
 	if (ref($b) eq q(HASH))
 	{
-		return match([sort keys %$a], [sort keys %$b]) if ref($a) eq q(HASH);
-		return any { exists $b->{$_} } @$a             if ref($a) eq q(ARRAY);
-		return any { $_ =~ $a } keys %$b               if ref($a) eq q(Regexp);
-		return !!0                                     if !defined($a);
+		return match([sort map "$_", keys %$a], [sort map "$_", keys %$b])
+			if ref($a) eq q(HASH);
+		
+		return any { exists $b->{$_} } @$a  if ref($a) eq q(ARRAY);
+		return any { $_ =~ $a } keys %$b    if ref($a) eq q(Regexp);
+		return !!0                          if !defined($a);
 		return exists $b->{$a};
 	}
 	
@@ -71,10 +83,20 @@ sub match
 	
 	return !!$a->check($b)                 if blessed($a) && $a->isa("Type::Tiny");
 	return !!$a->MATCH($b)                 if blessed($a) && $a->can("MATCH");
-	return eval 'no warnings; !!($a~~$b)'  if blessed($a) && $] >= 5.010 && do { require overload; overload::Overloaded($a) };
-	return $a == $b                        if looks_like_number($b);
+	return eval 'no warnings; !!($a~~$b)'  if blessed($a) && $] >= 5.010 && do { require overload; overload::Method($a, "~~") };
 	return !defined($b)                    if !defined($a);
+	return $a == $b                        if _is_number($b);
+	return $a == $b                        if _is_number($a) && looks_like_number($b);
+	
 	return $a eq $b;
+}
+
+sub _is_number
+{
+	my $value = shift;
+	return if ref $value;
+	my $flags = B::svref_2object(\$value)->FLAGS;
+	$flags & ( B::SVp_IOK | B::SVp_NOK ) and !( $flags & B::SVp_POK );
 }
 
 *M = &infix(\&match);
@@ -107,12 +129,6 @@ match::smart provides a simple match operator C<< |M| >> that acts like
 more or less identically to the (as of Perl 5.18) deprecated smart match
 operator.
 
-While the real smart match operator implicitly takes references to operands
-that are hashes or arrays, match::smart's operator does not.
-
-   @foo ~~ %bar       # means: \@foo ~~ \%bar
-   @foo |M| %bar      # means: scalar(@foo) |M| scalar(%bar)
-
 If you don't like the crazy C<Sub::Infix> operator, you can alternatively
 export a more normal function:
 
@@ -123,6 +139,35 @@ export a more normal function:
    {
       say "$this matches $that";
    }
+
+=head2 Differences with ~~
+
+There were major changes to smart match between 5.10.0 and 5.10.1. This
+module attempts to emulate the behaviour of the operator in more recent
+versions of Perl. In particular, 5.18.0 (minus the warnings). Divergences
+not noted below should be considered bugs.
+
+While the real smart match operator implicitly takes references to operands
+that are hashes or arrays, match::smart's operator does not.
+
+   @foo ~~ %bar       # means: \@foo ~~ \%bar
+   @foo |M| %bar      # means: scalar(@foo) |M| scalar(%bar)
+
+If you want the C<< \@foo ~~ \%bar >> behaviour, you need to add the
+backslashes yourself:
+
+   \@foo |M| \%bar
+
+Similarly:
+
+   "foo" ~~  /foo/    # works
+   "foo" |M| /foo/    # no worky!
+   "foo" |M| qr/foo/  # do this instead
+
+match::smart treats the C<MATCH> method on blessed objects (if it exists)
+like an overloaded C<< ~~ >>. This is for compatibility with L<match::simple>,
+and for compatibility with pre-5.10 Perls that don't allow overloading
+C<< ~~ >>.
 
 =begin trustme
 

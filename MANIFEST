@@ -33,4 +33,5 @@ meta/people.pret
 README
 t/01basic.t
 t/02simple.t
+t/03smart.t
 SIGNATURE                                Public-key signature (added by MakeMaker)

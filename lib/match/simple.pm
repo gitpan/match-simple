@@ -10,7 +10,7 @@ use Sub::Infix qw(infix);
 
 BEGIN {
 	$match::simple::AUTHORITY = 'cpan:TOBYINK';
-	$match::simple::VERSION   = '0.001';
+	$match::simple::VERSION   = '0.002';
 }
 
 use base "Exporter::TypeTiny";
@@ -30,7 +30,7 @@ sub match
 	return any { match($a, $_) } @$b       if ref($b) eq q(ARRAY);
 	return !!$b->check($a)                 if blessed($b) && $b->isa("Type::Tiny");
 	return !!$b->MATCH($a)                 if blessed($b) && $b->can("MATCH");
-	return eval 'no warnings; !!($a~~$b)'  if blessed($b) && $] >= 5.010 && do { require overload; overload::Overloaded($b) };
+	return eval 'no warnings; !!($a~~$b)'  if blessed($b) && $] >= 5.010 && do { require overload; overload::Method($b, "~~") };
 	
 	require Carp;
 	Carp::croak("match::simple cannot match anything against: $b");

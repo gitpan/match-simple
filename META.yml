@@ -31,4 +31,4 @@ resources:
   homepage: https://metacpan.org/release/match-simple
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tobyink/p5-match-simple
-version: 0.001
+version: 0.002
