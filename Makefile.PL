@@ -16,10 +16,20 @@ my $meta = {
                       },
   "name"           => "match-simple",
   "no_index"       => { directory => ["eg", "examples", "inc", "t", "xt"] },
-  "prereqs"        => { configure => { requires => { "ExtUtils::MakeMaker" => 6.17 } } },
+  "prereqs"        => {
+                        configure => { requires => { "ExtUtils::MakeMaker" => 6.17 } },
+                        runtime => {
+                          requires => {
+                            "Exporter::Tiny"  => 0.026,
+                            "List::MoreUtils" => 0,
+                            "Sub::Infix"      => 0.001,
+                          },
+                        },
+                        test => { requires => { "Test::More" => 0.96 } },
+                      },
   "provides"       => {
-                        "match::simple" => { file => "lib/match/simple.pm", version => 0.005 },
-                        "match::smart"  => { file => "lib/match/smart.pm", version => 0.005 },
+                        "match::simple" => { file => "lib/match/simple.pm", version => 0.006 },
+                        "match::smart"  => { file => "lib/match/smart.pm", version => 0.006 },
                       },
   "release_status" => "stable",
   "resources"      => {
@@ -31,7 +41,7 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-match-simple" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/match-simple/project",
                       },
-  "version"        => 0.005,
+  "version"        => 0.006,
 };
 
 my %dynamic_config;

@@ -29,16 +29,28 @@
          "requires" : {
             "ExtUtils::MakeMaker" : "6.17"
          }
+      },
+      "runtime" : {
+         "requires" : {
+            "Exporter::Tiny" : "0.026",
+            "List::MoreUtils" : "0",
+            "Sub::Infix" : "0.001"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0.96"
+         }
       }
    },
    "provides" : {
       "match::simple" : {
          "file" : "lib/match/simple.pm",
-         "version" : "0.005"
+         "version" : "0.006"
       },
       "match::smart" : {
          "file" : "lib/match/smart.pm",
-         "version" : "0.005"
+         "version" : "0.006"
       }
    },
    "release_status" : "stable",
@@ -56,5 +68,5 @@
          "web" : "https://github.com/tobyink/p5-match-simple"
       }
    },
-   "version" : "0.005"
+   "version" : "0.006"
 }
