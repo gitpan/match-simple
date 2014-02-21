@@ -7,7 +7,7 @@ my $meta = {
   "abstract"       => "simplified clone of smartmatch operator",
   "author"         => ["Toby Inkster (TOBYINK) <tobyink\@cpan.org>"],
   "dynamic_config" => 0,
-  "generated_by"   => "Dist::Inkt::Profile::TOBYINK version 0.013, CPAN::Meta::Converter version 2.120921",
+  "generated_by"   => "Dist::Inkt::Profile::TOBYINK version 0.014, CPAN::Meta::Converter version 2.120921",
   "keywords"       => [],
   "license"        => ["perl_5"],
   "meta-spec"      => {
@@ -19,19 +19,20 @@ my $meta = {
   "prereqs"        => {
                         configure => { requires => { "ExtUtils::MakeMaker" => 6.17 } },
                         runtime => {
-                          requires => {
-                            "Exporter::Tiny"  => 0.026,
-                            "List::MoreUtils" => 0,
-                            "Sub::Infix"      => 0.001,
-                          },
+                          recommends => { "match::simple::XS" => 0 },
+                          requires   => {
+                                          "Exporter::Tiny"  => 0.026,
+                                          "List::MoreUtils" => 0,
+                                          "Sub::Infix"      => 0.001,
+                                        },
                         },
                         test => { requires => { "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "match::simple" => { file => "lib/match/simple.pm", version => 0.006 },
-                        "match::smart"  => { file => "lib/match/smart.pm", version => 0.006 },
+                        "match::simple" => { file => "lib/match/simple.pm", version => "0.007_01" },
+                        "match::smart"  => { file => "lib/match/smart.pm", version => "0.007_01" },
                       },
-  "release_status" => "stable",
+  "release_status" => "testing",
   "resources"      => {
                         bugtracker   => {
                                           web => "http://rt.cpan.org/Dist/Display.html?Queue=match-simple",
@@ -41,7 +42,7 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-match-simple" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/match-simple/project",
                       },
-  "version"        => 0.006,
+  "version"        => "0.007_01",
 };
 
 my %dynamic_config;
@@ -53,6 +54,7 @@ my %WriteMakefileArgs = (
 	VERSION    => $meta->{version},
 	EXE_FILES  => [ map $_->{file}, values %{ $meta->{x_provides_scripts} || {} } ],
 	NAME       => do { my $n = $meta->{name}; $n =~ s/-/::/g; $n },
+	test       => { TESTS => "t/*.t" },
 	%dynamic_config,
 );
 
