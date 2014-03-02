@@ -26,11 +26,11 @@ my $meta = {
                                           "Sub::Infix"      => 0.001,
                                         },
                         },
-                        test => { requires => { "Test::More" => 0.96 } },
+                        test => { requires => { "Test::Fatal" => 0, "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "match::simple" => { file => "lib/match/simple.pm", version => "0.007_01" },
-                        "match::smart"  => { file => "lib/match/smart.pm", version => "0.007_01" },
+                        "match::simple" => { file => "lib/match/simple.pm", version => "0.007_02" },
+                        "match::smart"  => { file => "lib/match/smart.pm", version => "0.007_02" },
                       },
   "release_status" => "testing",
   "resources"      => {
@@ -42,7 +42,7 @@ my $meta = {
                         repository   => { type => "git", web => "https://github.com/tobyink/p5-match-simple" },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/match-simple/project",
                       },
-  "version"        => "0.007_01",
+  "version"        => "0.007_02",
 };
 
 my %dynamic_config;

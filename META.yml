@@ -3,6 +3,7 @@ abstract: 'simplified clone of smartmatch operator'
 author:
   - 'Toby Inkster (TOBYINK) <tobyink@cpan.org>'
 build_requires:
+  Test::Fatal: 0
   Test::More: 0.96
 configure_requires:
   ExtUtils::MakeMaker: 6.17
@@ -25,10 +26,10 @@ optional_features: {}
 provides:
   match::simple:
     file: lib/match/simple.pm
-    version: 0.007_01
+    version: 0.007_02
   match::smart:
     file: lib/match/smart.pm
-    version: 0.007_01
+    version: 0.007_02
 recommends:
   match::simple::XS: 0
 requires:
@@ -41,4 +42,4 @@ resources:
   homepage: https://metacpan.org/release/match-simple
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tobyink/p5-match-simple
-version: 0.007_01
+version: 0.007_02

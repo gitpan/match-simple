@@ -6,6 +6,11 @@ Home page:    <https://metacpan.org/release/match-simple>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=match-simple>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.007_02	2014-03-02
+
+ [ Test Suite ]
+ - Improved match::simple test cases.
+
 0.007_01	2014-02-21
 
  - Use match::simple::XS if it's installed.
