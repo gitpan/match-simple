@@ -26,10 +26,10 @@ optional_features: {}
 provides:
   match::simple:
     file: lib/match/simple.pm
-    version: 0.007_02
+    version: 0.007_03
   match::smart:
     file: lib/match/smart.pm
-    version: 0.007_02
+    version: 0.007_03
 recommends:
   match::simple::XS: 0
 requires:
@@ -42,4 +42,4 @@ resources:
   homepage: https://metacpan.org/release/match-simple
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tobyink/p5-match-simple
-version: 0.007_02
+version: 0.007_03
