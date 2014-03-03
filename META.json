@@ -32,7 +32,7 @@
       },
       "runtime" : {
          "recommends" : {
-            "match::simple::XS" : "0"
+            "match::simple::XS" : "0.001"
          },
          "requires" : {
             "Exporter::Tiny" : "0.026",
@@ -50,14 +50,14 @@
    "provides" : {
       "match::simple" : {
          "file" : "lib/match/simple.pm",
-         "version" : "0.007_03"
+         "version" : "0.008"
       },
       "match::smart" : {
          "file" : "lib/match/smart.pm",
-         "version" : "0.007_03"
+         "version" : "0.008"
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "X_identifier" : "http://purl.org/NET/cpan-uri/dist/match-simple/project",
       "bugtracker" : {
@@ -72,5 +72,5 @@
          "web" : "https://github.com/tobyink/p5-match-simple"
       }
    },
-   "version" : "0.007_03"
+   "version" : "0.008"
 }

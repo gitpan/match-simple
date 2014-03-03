@@ -6,6 +6,14 @@ Home page:    <https://metacpan.org/release/match-simple>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=match-simple>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.008	2014-03-03
+
+ [ Packaging ]
+ - Bump recommended version of match::simple::XS to 0.001.
+
+ [ Other ]
+ - Don't use match::simple::XS if it's too old, or is unstable.
+
 0.007_03	2014-03-02
 
  [ Test Suite ]
