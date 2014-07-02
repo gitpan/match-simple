@@ -1,17 +1,16 @@
 package match::simple;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 use Exporter::Tiny;
-use List::MoreUtils qw(any);
+use List::Util 1.33 qw(any);
 use Scalar::Util qw(blessed);
-use Sub::Infix qw(infix);
 
 BEGIN {
 	$match::simple::AUTHORITY = 'cpan:TOBYINK';
-	$match::simple::VERSION   = '0.008';
+	$match::simple::VERSION   = '0.009';
 }
 
 our @ISA       = qw( Exporter::Tiny );
@@ -67,7 +66,13 @@ sub match
 
 PP
 
-*M = &infix(\&match);
+sub _generate_M
+{
+	require Sub::Infix;
+	&Sub::Infix::infix(\&match);
+}
+
+1;
 
 __END__
 

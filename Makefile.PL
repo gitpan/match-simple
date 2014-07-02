@@ -7,7 +7,7 @@ my $meta = {
   "abstract"       => "simplified clone of smartmatch operator",
   "author"         => ["Toby Inkster (TOBYINK) <tobyink\@cpan.org>"],
   "dynamic_config" => 0,
-  "generated_by"   => "Dist::Inkt::Profile::TOBYINK version 0.014, CPAN::Meta::Converter version 2.120921",
+  "generated_by"   => "Dist::Inkt::Profile::TOBYINK version 0.016, CPAN::Meta::Converter version 2.140640",
   "keywords"       => [],
   "license"        => ["perl_5"],
   "meta-spec"      => {
@@ -21,16 +21,18 @@ my $meta = {
                         runtime => {
                           recommends => { "match::simple::XS" => 0.001 },
                           requires   => {
-                                          "Exporter::Tiny"  => 0.026,
-                                          "List::MoreUtils" => 0,
-                                          "Sub::Infix"      => 0.001,
+                                          "Exporter::Tiny" => 0.026,
+                                          "List::Util"     => 1.33,
+                                          "perl"           => 5.006001,
+                                          "Scalar::Util"   => 0,
+                                          "Sub::Infix"     => 0.004,
                                         },
                         },
                         test => { requires => { "Test::Fatal" => 0, "Test::More" => 0.96 } },
                       },
   "provides"       => {
-                        "match::simple" => { file => "lib/match/simple.pm", version => 0.008 },
-                        "match::smart"  => { file => "lib/match/smart.pm", version => 0.008 },
+                        "match::simple" => { file => "lib/match/simple.pm", version => 0.009 },
+                        "match::smart"  => { file => "lib/match/smart.pm", version => 0.009 },
                       },
   "release_status" => "stable",
   "resources"      => {
@@ -39,10 +41,14 @@ my $meta = {
                                         },
                         homepage     => "https://metacpan.org/release/match-simple",
                         license      => ["http://dev.perl.org/licenses/"],
-                        repository   => { type => "git", web => "https://github.com/tobyink/p5-match-simple" },
+                        repository   => {
+                                          type => "git",
+                                          url  => "git://github.com/tobyink/p5-match-simple.git",
+                                          web  => "https://github.com/tobyink/p5-match-simple",
+                                        },
                         X_identifier => "http://purl.org/NET/cpan-uri/dist/match-simple/project",
                       },
-  "version"        => 0.008,
+  "version"        => 0.009,
 };
 
 my %dynamic_config;

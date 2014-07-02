@@ -1,18 +1,17 @@
 package match::smart;
 
-use 5.008001;
+use 5.006001;
 use strict;
 use warnings;
 
 use B qw();
 use Exporter::Tiny;
-use List::MoreUtils qw(any all);
+use List::Util 1.33 qw(any all);
 use Scalar::Util qw(blessed looks_like_number refaddr);
-use Sub::Infix qw(infix);
 
 BEGIN {
 	$match::smart::AUTHORITY = 'cpan:TOBYINK';
-	$match::smart::VERSION   = '0.008';
+	$match::smart::VERSION   = '0.009';
 }
 
 our @ISA       = qw( Exporter::Tiny );
@@ -100,7 +99,13 @@ sub _is_number
 	$flags & ( B::SVp_IOK | B::SVp_NOK ) and !( $flags & B::SVp_POK );
 }
 
-*M = &infix(\&match);
+sub _generate_M
+{
+	require Sub::Infix;
+	&Sub::Infix::infix(\&match);
+}
+
+1;
 
 __END__
 
